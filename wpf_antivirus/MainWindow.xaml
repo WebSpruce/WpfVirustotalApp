@@ -1,0 +1,27 @@
+﻿<Window x:Class="wpf_antivirus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_antivirus"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="400"
+        Background="#B5FBDD">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,5,5,0">
+            <Border BorderThickness="2" BorderBrush="Black" Background="#76FEC5">
+                <Label Content="Drag file here." HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontSize="10"></Label>    
+            </Border>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,5,0,0" Background="#76FEC5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Check file" Click="Button_Click"
+                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -20,6 +20,7 @@ using VirusTotalNet.ResponseCodes;
 using VirusTotalNet.Results;
 using VirusTotalNet;
 using Microsoft.Win32;
+using System.Collections.ObjectModel;
 
 namespace wpf_antivirus
 {
@@ -29,16 +30,21 @@ namespace wpf_antivirus
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
             virusTotal = new VirusTotal("c7e3e0f8e2c5684677408d0e039d321139390c4bc2f01ca091814ea213d00ec7");
         }
-        public string fileDropped = string.Empty;
-        private void Grid_Drop(object sender, DragEventArgs e)
+        public string fileDropped { get; set; }
+        public FileReport fileReport;
+        private async void Grid_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 Trace.WriteLine("file: " + files[0]);
                 fileDropped = files[0];
+
+                fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
+                listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.SHA256 });
             }
         }
 
@@ -56,7 +62,6 @@ namespace wpf_antivirus
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         { 
-            var fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
             if (fileReport.Positives > 0)   //amount of threat
             {
                 MessageBox.Show("I found something! Be careful."+"\n"+
@@ -80,5 +85,20 @@ namespace wpf_antivirus
             }
             return sb.ToString();
         }
+
+        private void ElementClick(object sender, RoutedEventArgs e)
+        {
+            FileList selectedFL = (sender as Button).DataContext as FileList;
+            Trace.WriteLine(selectedFL.id);
+            listView.Items.RemoveAt(selectedFL.id-1);
+            fileDropped = string.Empty;
+            fileReport = null;
+        }
+    }
+    public class FileList
+    {
+        public int id { get; set; }
+        public string fileDropped { get; set; }
+        public string fileHash { get; set; }
     }
 }

@@ -21,6 +21,7 @@ using VirusTotalNet.Results;
 using VirusTotalNet;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using WPFCustomMessageBox;
 
 namespace wpf_antivirus
 {
@@ -32,6 +33,7 @@ namespace wpf_antivirus
             InitializeComponent();
             DataContext = this;
             virusTotal = new VirusTotal("c7e3e0f8e2c5684677408d0e039d321139390c4bc2f01ca091814ea213d00ec7");
+            listView.UnselectAll();
         }
         public string fileDropped { get; set; }
         public FileReport fileReport;
@@ -61,15 +63,23 @@ namespace wpf_antivirus
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
-        { 
-            if (fileReport.Positives > 0)   //amount of threat
+        {
+            if (listView.Items.Count != 0)
             {
-                MessageBox.Show($"I found something! Be careful.\nFilePath: {fileDropped}\n Found {fileReport.Positives} threat!", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (fileReport.Positives > 0)   //amount of threat
+                {
+                    MessageBox.Show($"I found something! Be careful.\nFilePath: {fileDropped}\n Found {fileReport.Positives} threat!", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"Your file is save.\nFilePath: {fileDropped}\nFound {fileReport.Positives} threat.", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
             else
             {
-                MessageBox.Show($"Your file is save.\nFilePath: {fileDropped}\nFound {fileReport.Positives} threat.", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("There's no item in list.","Something's wrong.",MessageBoxButton.OK,MessageBoxImage.Stop);
             }
+            
                 
         }
         public static string ToSHA256(string s)
@@ -84,19 +94,27 @@ namespace wpf_antivirus
             return sb.ToString();
         }
 
-        private void ElementClick(object sender, RoutedEventArgs e)
-        {
-            FileList selectedFL = (sender as Button).DataContext as FileList;
-            Trace.WriteLine(selectedFL.id);
-            listView.Items.RemoveAt(selectedFL.id-1);
-            fileDropped = string.Empty;
-            fileReport = null;
-        }
+        
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FileList selectedFile = (FileList)listView.SelectedItems[0];
-            MessageBox.Show($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}","Selected Item",MessageBoxButton.OK,MessageBoxImage.Information);
+            if (listView.SelectedItems.Count!=0)
+            {
+                FileList selectedFile = (FileList)listView.SelectedItems[0];
+                //MessageBox.Show($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}","Selected Item",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBoxResult MBResult = CustomMessageBox.ShowYesNo($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}", "Selected Item", "Okay", "Remove");
+                if (MBResult == MessageBoxResult.Yes)
+                {
+                    listView.UnselectAll();
+                }
+                else if (MBResult == MessageBoxResult.No)
+                {
+                    listView.Items.RemoveAt(selectedFile.id - 1);
+                    fileDropped = string.Empty;
+                    fileReport = null;
+                }
+            }
+            
         }
     }
     public class FileList

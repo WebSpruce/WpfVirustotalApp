@@ -8,7 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="anti.png" />
+    <None Remove="images\anti.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="VirusTotalNet" Version="2.2.0" />
+    <PackageReference Include="WPFCustomMessageBox" Version="1.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="anti.png" />
+    <Resource Include="images\anti.png" />
   </ItemGroup>
 
 </Project>

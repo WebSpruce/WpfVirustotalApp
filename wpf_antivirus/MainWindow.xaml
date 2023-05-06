@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:wpf_antivirus"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="500"
-        Background="#B5FBDD">
+        Background="#B5FBDD" 
+        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Icon="/anti.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"></RowDefinition>
@@ -35,7 +37,6 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="{Binding id,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                             <Label Grid.Column="1" Content="{Binding fileDropped,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                            <Button Grid.Column="2" Click="ElementClick" Content="X" Padding="5,4,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" Background="#76FEC5" BorderThickness="2"></Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

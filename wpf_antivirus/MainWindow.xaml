@@ -22,7 +22,7 @@
             </Border>
         </Grid>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <ListView x:Name="listView" Width="310" Height="219" Margin="5,5,5,0"
+            <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged" SelectionMode="Single" Width="310" Height="219" Margin="5,5,5,0"
                       HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="2" Background="#76FEC5" FontSize="10" Padding="5"
                       >
                 <ListView.ItemTemplate>

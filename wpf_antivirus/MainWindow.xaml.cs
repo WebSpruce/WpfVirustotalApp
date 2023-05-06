@@ -44,7 +44,7 @@ namespace wpf_antivirus
                 fileDropped = files[0];
 
                 fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
-                listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.SHA256 });
+                listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource });
             }
         }
 
@@ -64,13 +64,11 @@ namespace wpf_antivirus
         { 
             if (fileReport.Positives > 0)   //amount of threat
             {
-                MessageBox.Show("I found something! Be careful."+"\n"+
-                    "\n"+"FilePath: "+ fileDropped+"\n"+"Found "+fileReport.Positives+" threat!", "Result of scanning this file");
+                MessageBox.Show($"I found something! Be careful.\nFilePath: {fileDropped}\n Found {fileReport.Positives} threat!", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                MessageBox.Show("Your file is save." + "\n" + "hash: "+
-                    "\n" + "FilePath: " + fileDropped + "\n" + "Found " + fileReport.Positives + " threat.", "Result of scanning this file");
+                MessageBox.Show($"Your file is save.\nFilePath: {fileDropped}\nFound {fileReport.Positives} threat.", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
                 
         }
@@ -93,6 +91,12 @@ namespace wpf_antivirus
             listView.Items.RemoveAt(selectedFL.id-1);
             fileDropped = string.Empty;
             fileReport = null;
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FileList selectedFile = (FileList)listView.SelectedItems[0];
+            MessageBox.Show($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}","Selected Item",MessageBoxButton.OK,MessageBoxImage.Information);
         }
     }
     public class FileList

@@ -116,6 +116,21 @@ namespace wpf_antivirus
             }
             
         }
+
+        private async void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    fileDropped = openFileDialog.FileName;
+                    fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
+                    listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource });
+                }
+                
+            }
+        }
     }
     public class FileList
     {

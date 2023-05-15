@@ -9,6 +9,13 @@
         Background="#B5FBDD" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
+    <Window.Resources>
+        <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="BorderBrush" Value="black" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="Background" Value="#76FEC5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"></RowDefinition>
@@ -18,32 +25,34 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,5,5,0">
-            <Border BorderThickness="2" BorderBrush="Black" Background="#76FEC5">
+        <Grid Grid.Row="0" Grid.Column="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,5,5,0" >
+            <Border MouseDown="Border_MouseDown" BorderThickness="2" BorderBrush="Black" CornerRadius="10" Background="#76FEC5">
                 <Label Content="Drag file here." HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontSize="10"></Label>    
             </Border>
-        </Grid>
+        </Grid> 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged" SelectionMode="Single" Width="310" Height="219" Margin="5,5,5,0"
-                      HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="2" Background="#76FEC5" FontSize="10" Padding="5"
+            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="10" Background="#76FEC5" Margin="5,5,5,0" Height="219">
+                <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged" SelectionMode="Single" Width="310" Height="219" Margin="5,5,5,0"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Transparent" Background="Transparent" FontSize="10" Padding="5"
                       >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="3*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="{Binding id,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                            <Label Grid.Column="1" Content="{Binding fileDropped,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="{Binding id,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                                <Label Grid.Column="1" Content="{Binding fileDropped,Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Border BorderThickness="2" BorderBrush="Black" Margin="0,5,0,0" Background="#76FEC5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,5,5,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="Check file" Click="Button_Click"
                         Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>

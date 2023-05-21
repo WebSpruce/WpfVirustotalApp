@@ -39,14 +39,18 @@ namespace wpf_antivirus
         public FileReport fileReport;
         private async void Grid_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && listView.Items.Count == 0)
             {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                Trace.WriteLine("file: " + files[0]);
-                fileDropped = files[0];
+                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    Trace.WriteLine("file: " + files[0]);
+                    fileDropped = files[0];
+                    fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
+                    listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource }); 
+            }
+            else
+            {
+                MessageBox.Show("You can scan only one file.", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
-                listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource });
             }
         }
 

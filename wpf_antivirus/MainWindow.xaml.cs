@@ -22,6 +22,7 @@ using VirusTotalNet;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using WPFCustomMessageBox;
+using wpf_antivirus.pages;
 
 namespace wpf_antivirus
 {
@@ -134,6 +135,12 @@ namespace wpf_antivirus
                 }
                 
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ScanUrl scanurl = new ScanUrl();
+            scanurl.Show();
         }
     }
     public class FileList

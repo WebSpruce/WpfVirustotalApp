@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VirusTotalNet.Results;
 using VirusTotalNet;
+using System.Diagnostics;
 
 namespace wpf_antivirus.pages
 {
@@ -21,49 +22,41 @@ namespace wpf_antivirus.pages
     /// </summary>
     public partial class ScanUrl : Window
     {
+        public static ScanUrl everything;
+        public VirusTotal virusTotal2;
+        public UrlReport urlReport;
         public ScanUrl()
         {
             InitializeComponent();
-            if (string.IsNullOrEmpty(url.Text))
-            {
-                url.Text = "Your url";
-                url.Foreground = Brushes.Gray;
-            }
+            everything = this;
+            virusTotal2 = MainWindow.everything.virusTotal;
         }
-
-        private void url_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if(!string.IsNullOrEmpty(url.Text))
-            {
-                url.Text = "";
-                url.Foreground = Brushes.Black;
-            }
-        }
-
-        private void url_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (string.IsNullOrEmpty(url.Text))
-            {
-                url.Text = "Your url";
-                url.Foreground = Brushes.Gray;
-            }
-        }
-        public VirusTotal virusTotal;
-        public UrlReport urlReport;
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(url.Text))
+            try
             {
-                urlReport = await virusTotal.GetUrlReportAsync(url.Text);
-                if (urlReport.Positives > 0)   //amount of threat
+                if (!string.IsNullOrEmpty(url.Text))
                 {
-                    MessageBox.Show($"I found something! Be careful.\nUrl link: {url.Text}\n Found {urlReport.Positives} threat!", "Result of scanning this link", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    urlReport = await virusTotal2.GetUrlReportAsync(url.Text);
+                    if (urlReport.Positives > 0)   //amount of threat
+                    {
+                        MessageBox.Show($"I found something! Be careful.\nUrl link: {url.Text}\n Found {urlReport.Positives} threat!", "Result of scanning this link", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"The link is save.\nUrl link: {url.Text}\nFound {urlReport.Positives} threat.", "Result of scanning this link", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"The link is save.\nUrl link: {url.Text}\nFound {urlReport.Positives} threat.", "Result of scanning this link", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("Something is wrong with input field.","Information",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
             }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.WriteLine($"Something is wrong here: {ex}");
+            }
+            
             
         }
     }

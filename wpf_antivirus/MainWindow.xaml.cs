@@ -29,9 +29,11 @@ namespace wpf_antivirus
     public partial class MainWindow : Window
     {
         public VirusTotal virusTotal;
+        public static MainWindow everything;
         public MainWindow()
         {
             InitializeComponent();
+            everything = this;
             DataContext = this;
             virusTotal = new VirusTotal("c7e3e0f8e2c5684677408d0e039d321139390c4bc2f01ca091814ea213d00ec7");
             listView.UnselectAll();

@@ -15,7 +15,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="url" MouseEnter="url_MouseEnter" MouseLeave="url_MouseLeave"
+            <TextBox x:Name="url"
                      HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="20"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">

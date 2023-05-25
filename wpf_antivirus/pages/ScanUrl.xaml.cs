@@ -46,6 +46,12 @@ namespace wpf_antivirus.pages
                     {
                         MessageBox.Show($"The link is save.\nUrl link: {url.Text}\nFound {urlReport.Positives} threat.", "Result of scanning this link", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     }
+                    await App.Db.SaveScanResult(new scanhistory
+                    {
+                        path = url.Text,
+                        amount = urlReport.Positives,
+                        time = DateTime.Now.TimeOfDay
+                    });
                 }
                 else
                 {

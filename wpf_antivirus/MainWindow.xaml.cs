@@ -23,6 +23,7 @@ using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using WPFCustomMessageBox;
 using wpf_antivirus.pages;
+using System.Data;
 
 namespace wpf_antivirus
 {
@@ -69,25 +70,37 @@ namespace wpf_antivirus
             }
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_ScanFile(object sender, RoutedEventArgs e)
         {
-            if (listView.Items.Count != 0)
+            try
             {
-                if (fileReport.Positives > 0)   //amount of threat
+                if (listView.Items.Count != 0)
                 {
-                    MessageBox.Show($"I found something! Be careful.\nFilePath: {fileDropped}\n Found {fileReport.Positives} threat!", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (fileReport.Positives > 0)   //amount of threat
+                    {
+                        MessageBox.Show($"I found something! Be careful.\nFilePath: {fileDropped}\n Found {fileReport.Positives} threat!", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Your file is save.\nFilePath: {fileDropped}\nFound {fileReport.Positives} threat.", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                    Trace.WriteLine("File: " + fileReport.Positives + ", " + fileReport);
+                    await App.Db.SaveScanResult(new scanhistory
+                    {
+                        path = fileDropped,
+                        amount = fileReport.Positives,
+                        time = DateTime.Now.TimeOfDay
+                    });
                 }
                 else
                 {
-                    MessageBox.Show($"Your file is save.\nFilePath: {fileDropped}\nFound {fileReport.Positives} threat.", "Result of scanning this file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("There's no item in list.", "Something's wrong.", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("There's no item in list.","Something's wrong.",MessageBoxButton.OK,MessageBoxImage.Stop);
-            }
-            
-                
+                Trace.WriteLine($"ScanFile error: {ex}");
+            }   
         }
         public static string ToSHA256(string s)
         {
@@ -139,10 +152,16 @@ namespace wpf_antivirus
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_ScanUrl(object sender, RoutedEventArgs e)
         {
             ScanUrl scanurl = new ScanUrl();
             scanurl.Show();
+        }
+
+        private void Button_History(object sender, RoutedEventArgs e)
+        {
+            HistoryPage hpage = new HistoryPage();
+            hpage.Show();
         }
     }
     public class FileList

@@ -52,12 +52,16 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,5,75,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="Scan from url" Click="Button_Click_1"
+            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,5,160,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="History" Click="Button_History"
+                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+            </Border>
+            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,-30,75,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="Scan from url" Click="Button_ScanUrl"
                         Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>
             <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,-30,5,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="Check file" Click="Button_Click"
+                <Button Content="Check file" Click="Button_ScanFile"
                         Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>
         </StackPanel>

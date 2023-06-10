@@ -40,6 +40,7 @@ namespace wpf_antivirus
             key = "3333333333333333333333333333333333333333333333333333333333333333";
             virusTotal = new VirusTotal(key);
             listView.UnselectAll();
+
             GoogleKey gkey = new GoogleKey();
             gkey.Show();
         }

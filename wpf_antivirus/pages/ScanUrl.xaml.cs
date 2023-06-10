@@ -29,7 +29,8 @@ namespace wpf_antivirus.pages
         {
             InitializeComponent();
             everything = this;
-            virusTotal2 = MainWindow.everything.virusTotal;
+            Trace.WriteLine($"Key: {MainWindow.everything.key}");
+            virusTotal2 = new VirusTotal(MainWindow.everything.key);
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {

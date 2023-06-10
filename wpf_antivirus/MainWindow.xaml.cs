@@ -31,13 +31,17 @@ namespace wpf_antivirus
     {
         public VirusTotal virusTotal;
         public static MainWindow everything;
+        public string key;
         public MainWindow()
         {
             InitializeComponent();
             everything = this;
             DataContext = this;
-            virusTotal = new VirusTotal("c7e3e0f8e2c5684677408d0e039d321139390c4bc2f01ca091814ea213d00ec7");
+            key = "3333333333333333333333333333333333333333333333333333333333333333";
+            virusTotal = new VirusTotal(key);
             listView.UnselectAll();
+            GoogleKey gkey = new GoogleKey();
+            gkey.Show();
         }
         public string fileDropped { get; set; }
         public FileReport fileReport;
@@ -162,6 +166,11 @@ namespace wpf_antivirus
         {
             HistoryPage hpage = new HistoryPage();
             hpage.Show();
+        }
+        private void Button_Key(object sender, RoutedEventArgs e)
+        {
+            GoogleKey gkey = new GoogleKey();
+            gkey.Show();
         }
     }
     public class FileList

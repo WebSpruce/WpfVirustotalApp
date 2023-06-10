@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_antivirus.pages"
         mc:Ignorable="d"
-        Title="HistoryPage" Height="300" Width="500"
+        Title="Local History Of Scanning" Height="300" Width="500"
         Background="#B5FBDD" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png" Loaded="Window_Loaded">

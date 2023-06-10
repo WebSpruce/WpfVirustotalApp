@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_antivirus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500"
+        Title="VirusTotal - Scan File And Url" Height="300" Width="500"
         Background="#B5FBDD" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
@@ -52,6 +52,7 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Content="change google key" Click="Button_Key" Background="Transparent" BorderBrush="Transparent" Foreground="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5" Margin="0,0,30,-35"></Button>
             <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,5,160,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="History" Click="Button_History"
                         Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>

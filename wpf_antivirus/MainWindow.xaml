@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:wpf_antivirus"
         mc:Ignorable="d"
         Title="VirusTotal - Scan File And Url" Height="300" Width="500"
-        Background="#B5FBDD" 
+        Background="#2c2f33" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
     <Window.Resources>
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="BorderBrush" Value="black" />
             <Setter Property="BorderThickness" Value="0,0,0,1" />
-            <Setter Property="Background" Value="#76FEC5"/>
+            <Setter Property="Background" Value="#2c2f33"/>
+            <Setter Property="Foreground" Value="#99aab5"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,12 +27,12 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,5,5,0" >
-            <Border MouseDown="Border_MouseDown" BorderThickness="2" BorderBrush="Black" CornerRadius="10" Background="#76FEC5">
-                <Label Content="Drag file here." HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" FontSize="10"></Label>    
+            <Border MouseDown="Border_MouseDown" BorderThickness="2" BorderBrush="#23272a" CornerRadius="10" Background="#2c2f33">
+                <Label Content="Drag file here." HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="#99aab5" FontSize="10"></Label>    
             </Border>
         </Grid> 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="10" Background="#76FEC5" Margin="5,5,5,0" Height="219">
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="10" Background="#2c2f33" Margin="5,5,5,0" Height="219">
                 <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged" SelectionMode="Single" Width="310" Height="219" Margin="5,5,5,0"
                       HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Transparent" Background="Transparent" FontSize="10" Padding="5"
                       >
@@ -52,18 +53,18 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button Content="change google key" Click="Button_Key" Background="Transparent" BorderBrush="Transparent" Foreground="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5" Margin="0,0,30,-35"></Button>
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,5,160,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Content="change api key" Click="Button_Key" Background="Transparent" BorderBrush="Transparent" Foreground="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5" Margin="0,0,30,-35"></Button>
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,5,160,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="History" Click="Button_History"
-                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,-30,75,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,-30,75,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="Scan from url" Click="Button_ScanUrl"
-                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Margin="0,-30,5,0" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,-30,5,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="Check file" Click="Button_ScanFile"
-                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
             </Border>
         </StackPanel>
     </Grid>

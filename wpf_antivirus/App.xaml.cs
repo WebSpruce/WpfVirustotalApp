@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using wpf_antivirus.pages;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace wpf_antivirus
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : System.Windows.Application
     {
         private static database db;
@@ -27,6 +18,12 @@ namespace wpf_antivirus
                 }
                 return db;
             }
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            APIKey window = new APIKey();
+            window.Show();
         }
     }
 }

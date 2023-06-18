@@ -1,29 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
-using System.IO;
 using System.Security.Cryptography;
-using VirusTotalNet.Objects;
-using VirusTotalNet.ResponseCodes;
 using VirusTotalNet.Results;
 using VirusTotalNet;
 using Microsoft.Win32;
-using System.Collections.ObjectModel;
 using WPFCustomMessageBox;
 using wpf_antivirus.pages;
-using System.Data;
 
 namespace wpf_antivirus
 {
@@ -37,12 +23,11 @@ namespace wpf_antivirus
             InitializeComponent();
             everything = this;
             DataContext = this;
-            key = "3333333333333333333333333333333333333333333333333333333333333333";
-            virusTotal = new VirusTotal(key);
+
             listView.UnselectAll();
 
-            GoogleKey gkey = new GoogleKey();
-            gkey.Show();
+            key = APIKey.everything.keyFromTxtFile;
+            virusTotal = new VirusTotal(key);
         }
         public string fileDropped { get; set; }
         public FileReport fileReport;
@@ -59,7 +44,6 @@ namespace wpf_antivirus
             else
             {
                 MessageBox.Show("You can scan only one file.", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
 
@@ -118,9 +102,6 @@ namespace wpf_antivirus
             }
             return sb.ToString();
         }
-
-        
-
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listView.SelectedItems.Count!=0)
@@ -170,7 +151,7 @@ namespace wpf_antivirus
         }
         private void Button_Key(object sender, RoutedEventArgs e)
         {
-            GoogleKey gkey = new GoogleKey();
+            APIKey gkey = new APIKey();
             gkey.Show();
         }
     }

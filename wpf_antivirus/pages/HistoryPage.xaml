@@ -6,23 +6,25 @@
         xmlns:local="clr-namespace:wpf_antivirus.pages"
         mc:Ignorable="d"
         Title="Local History Of Scanning" Height="300" Width="500"
-        Background="#B5FBDD" 
+        Background="#2c2f33" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#76FEC5"></Setter>
-            <Setter Property="BorderBrush" Value="#76FEC5"></Setter>
+            <Setter Property="Background" Value="#2c2f33"></Setter>
+            <Setter Property="BorderBrush" Value="#2c2f33"></Setter>
+            <Setter Property="Foreground" Value="#99aab5"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="#99aab5"></Setter>
             
         </Style>
     </Window.Resources>
     <Grid>
-        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="10" Background="#76FEC5" Margin="10">
+        <Border BorderThickness="2" BorderBrush="#2c2f33" CornerRadius="10" Background="#2c2f33" Margin="10">
             <ListView x:Name="listview"
             BorderBrush="Transparent" Background="Transparent" FontSize="10"  Margin="10" Padding="5">
                 <ListView.View>

@@ -1,4 +1,4 @@
-﻿<Window x:Class="wpf_antivirus.pages.GoogleKey"
+﻿<Window x:Class="wpf_antivirus.pages.APIKey"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wpf_antivirus.pages"
         mc:Ignorable="d"
         Title="Change API Key" Height="300" Width="500"
-        Background="#B5FBDD" 
+        Background="#2c2f33" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
     <Grid>
@@ -19,9 +19,9 @@
                      HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="20"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Background="#76FEC5" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50">
                 <Button Content="Set" Click="Button_Click"
-                        Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
+                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" FontSize="10" Padding="5"></Button>
             </Border>
         </StackPanel>
     </Grid>

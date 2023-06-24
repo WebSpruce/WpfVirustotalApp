@@ -1,4 +1,4 @@
-# wpf_antivirus
+# WpfVirustotalApp
 
 Simple antivirus app using VirusTotal API
 Plugins in project: VirusTotalNet, sqlite-net-pcl and WPFCustomMessageBox

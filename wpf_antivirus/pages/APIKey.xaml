@@ -4,25 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_antivirus.pages"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="Change API Key" Height="300" Width="500"
         Background="#2c2f33" 
-        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <ui:TitleBar Background="#23272a" Height="30"></ui:TitleBar>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="gkey"
-                     HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="20"></TextBox>
+            <ui:TextBox x:Name="gkey"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" MinWidth="200" Height="30" FontSize="12"></ui:TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50">
-                <Button Content="Set" Click="Button_Click"
-                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" FontSize="10" Padding="5"></Button>
-            </Border>
+            <ui:Button Content="Set" Click="Button_Click"
+                        Background="#23272a" BorderBrush="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" FontSize="10" Padding="5"></ui:Button>
         </StackPanel>
     </Grid>
 </Window>

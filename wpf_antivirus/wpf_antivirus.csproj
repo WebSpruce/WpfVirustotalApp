@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="VirusTotalNet" Version="2.2.0" />
+    <PackageReference Include="WPF-UI" Version="2.0.3" />
     <PackageReference Include="WPFCustomMessageBox" Version="1.0.7" />
   </ItemGroup>
 
@@ -22,5 +23,27 @@
     <Resource Include="anti.png" />
     <Resource Include="images\anti.png" />
   </ItemGroup>
+
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <NugetTools Include="$(SolutionDir)packages\NuGet.CommandLine.*\tools\NuGet.exe" />
+      <SquirrelTools Include="$(SolutionDir)packages\squirrel.windows.*\tools\Squirrel.exe" />
+    </ItemGroup>
+
+    <Copy SourceFiles="$(SquirrelTools-&gt;'%(FullPath)')" DestinationFiles="$(OutDir)...\Update.exe" Condition="!Exists('$(OutDir)...\Update.exe')" />
+
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="assemblyinfo" />
+    </GetAssemblyIdentity>
+
+    <PropertyGroup>
+      <Version>$([System.Version]::Parse(%(assemblyInfo.Version)).ToString(3))</Version>
+      <NuspecFile>$(SolutionDir)WPFAppFramework\ReleaseSpec.nuspec</NuspecFile>
+    </PropertyGroup>
+
+    <MXmlPeek XmlInputPath="$(NuspecFile)" Query="/package/metadata/id/test()">
+      <Output TaskParameter="Result" ItemName="ID" />
+    </MXmlPeek>
+  </Target>
 
 </Project>

@@ -10,6 +10,9 @@ using VirusTotalNet;
 using Microsoft.Win32;
 using WPFCustomMessageBox;
 using wpf_antivirus.pages;
+using System.Windows.Navigation;
+using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Mvvm.Services;
 
 namespace wpf_antivirus
 {

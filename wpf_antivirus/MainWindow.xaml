@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_antivirus"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="VirusTotal - Scan File And Url" Height="300" Width="500"
         Background="#2c2f33" 
-        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png">
     <Window.Resources>
         <Style TargetType="{x:Type ListViewItem}">
@@ -26,13 +27,14 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,5,5,0" >
+        <ui:TitleBar Grid.ColumnSpan="2" Background="#23272a" Height="30"></ui:TitleBar>
+        <Grid Grid.Row="0" Grid.Column="0" AllowDrop="True" Drop="Grid_Drop" Margin="5,40,5,0" >
             <Border MouseDown="Border_MouseDown" BorderThickness="2" BorderBrush="#23272a" CornerRadius="10" Background="#2c2f33">
                 <Label Content="Drag file here." HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="#99aab5" FontSize="10"></Label>    
             </Border>
         </Grid> 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="10" Background="#2c2f33" Margin="5,5,5,0" Height="219">
+            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="10" Background="#2c2f33" Margin="5,38,5,0" Height="219">
                 <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged" SelectionMode="Single" Width="310" Height="219" Margin="5,5,5,0"
                       HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Transparent" Background="Transparent" FontSize="10" Padding="5"
                       >
@@ -52,20 +54,17 @@
                 </ListView>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button Content="change api key" Click="Button_Key" Background="Transparent" BorderBrush="Transparent" Foreground="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5" Margin="0,0,30,-35"></Button>
-            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,5,160,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="History" Click="Button_History"
-                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
-            </Border>
-            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,-30,75,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="Scan from url" Click="Button_ScanUrl"
-                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
-            </Border>
-            <Border BorderThickness="2" BorderBrush="#23272a" CornerRadius="5" Margin="0,-30,5,0" Background="#23272a" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Content="Check file" Click="Button_ScanFile"
-                        Background="Transparent" BorderBrush="Transparent" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5"></Button>
-            </Border>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <ui:Button Content="change api key" Click="Button_Key" Background="Transparent" BorderBrush="Transparent" Foreground="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="5" Margin="30,0,0,0"></ui:Button>
+            <ui:Button Content="History" Click="Button_History"
+                Background="#23272a" BorderBrush="#23272a" Foreground="#99aab5"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="10,5,10,5" Margin="100,0,0,0">
+            </ui:Button>
+            <ui:Button Content="Scan from url" Click="Button_ScanUrl"
+                Background="#23272a" BorderBrush="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="10,5,10,5" Margin="30,0,0,0">
+            </ui:Button>
+            <ui:Button Content="Check file" Click="Button_ScanFile"
+                Background="#23272a" BorderBrush="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Padding="10,5,10,5" Margin="30,0,0,0">
+            </ui:Button>
         </StackPanel>
     </Grid>
 </Window>

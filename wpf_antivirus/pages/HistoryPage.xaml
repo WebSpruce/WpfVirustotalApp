@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_antivirus.pages"
         mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Title="Local History Of Scanning" Height="300" Width="500"
         Background="#2c2f33" 
-        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Icon="/anti.png" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type GridViewColumnHeader}">
@@ -24,7 +25,8 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border BorderThickness="2" BorderBrush="#2c2f33" CornerRadius="10" Background="#2c2f33" Margin="10">
+        <ui:TitleBar Grid.ColumnSpan="2" Background="#23272a" Height="30"></ui:TitleBar>
+        <ui:Badge BorderThickness="2" BorderBrush="#23272a" Background="#2c2f33" Margin="10,35,10,10">
             <ListView x:Name="listview"
             BorderBrush="Transparent" Background="Transparent" FontSize="10"  Margin="10" Padding="5">
                 <ListView.View>
@@ -36,6 +38,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Border>
+        </ui:Badge>
     </Grid>
 </Window>

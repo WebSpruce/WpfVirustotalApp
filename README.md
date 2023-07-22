@@ -9,3 +9,5 @@ WpfVirustotalApp includes:
 2. Scanning URL
 3. History of scanning (local)
 Requires Virustotal API Key.
+
+![p1](https://github.com/WebSpruce/WpfVirustotalApp/assets/117351406/9be6367c-12de-4e2a-8e89-f6f1a0e2a91c)

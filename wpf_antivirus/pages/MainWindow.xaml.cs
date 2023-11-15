@@ -8,13 +8,9 @@ using System.Security.Cryptography;
 using VirusTotalNet.Results;
 using VirusTotalNet;
 using Microsoft.Win32;
-using WPFCustomMessageBox;
-using wpf_antivirus.pages;
-using System.Windows.Navigation;
-using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Mvvm.Services;
+using wpf_antivirus.Models;
 
-namespace wpf_antivirus
+namespace wpf_antivirus.pages
 {
     public partial class MainWindow : Window
     {
@@ -28,7 +24,6 @@ namespace wpf_antivirus
             DataContext = this;
 
             listView.UnselectAll();
-
             key = APIKey.everything.keyFromTxtFile;
             virusTotal = new VirusTotal(key);
         }
@@ -38,11 +33,11 @@ namespace wpf_antivirus
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop) && listView.Items.Count == 0)
             {
-                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                    Trace.WriteLine("file: " + files[0]);
-                    fileDropped = files[0];
-                    fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
-                    listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource }); 
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                Trace.WriteLine("file: " + files[0]);
+                fileDropped = files[0];
+                fileReport = await virusTotal.GetFileReportAsync(ToSHA256(fileDropped));
+                listView.Items.Add(new FileList() { id = (listView.Items.Count + 1), fileDropped = fileDropped, fileHash = fileReport.Resource }); 
             }
             else
             {
@@ -110,13 +105,12 @@ namespace wpf_antivirus
             if (listView.SelectedItems.Count!=0)
             {
                 FileList selectedFile = (FileList)listView.SelectedItems[0];
-                //MessageBox.Show($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}","Selected Item",MessageBoxButton.OK,MessageBoxImage.Information);
-                MessageBoxResult MBResult = CustomMessageBox.ShowYesNo($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}", "Selected Item", "Okay", "Remove");
-                if (MBResult == MessageBoxResult.Yes)
+                MessageBoxResult MBResult = MessageBox.Show($"ID:{selectedFile.id} \nPath:{selectedFile.fileDropped}\nDo you want to delete it?", "Selected Item", MessageBoxButton.YesNo, MessageBoxImage.Stop);
+                if (MBResult == MessageBoxResult.No)
                 {
                     listView.UnselectAll();
                 }
-                else if (MBResult == MessageBoxResult.No)
+                else if (MBResult == MessageBoxResult.Yes)
                 {
                     listView.Items.RemoveAt(selectedFile.id - 1);
                     fileDropped = string.Empty;

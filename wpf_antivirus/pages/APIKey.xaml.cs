@@ -18,9 +18,7 @@ namespace wpf_antivirus.pages
             everything = this;
 
             LoadApiKey();
-            gkey.Text = keyFromTxtFile;
         }
-        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -55,6 +53,7 @@ namespace wpf_antivirus.pages
                 else
                 {
                     keyFromTxtFile = File.ReadAllText(filepath);
+                    gkey.Text = keyFromTxtFile;
                 }
             }
             catch (Exception ex)

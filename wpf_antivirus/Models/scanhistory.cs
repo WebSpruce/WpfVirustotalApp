@@ -1,16 +1,11 @@
-﻿using Microsoft.VisualBasic;
-using SQLite;
+﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace wpf_antivirus
+namespace wpf_antivirus.Models
 {
     public class scanhistory
     {
-        [AutoIncrement,PrimaryKey]
+        [AutoIncrement, PrimaryKey]
         public int id { get; set; }
         public string path { get; set; }
         public int amount { get; set; }

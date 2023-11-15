@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using wpf_antivirus.Data;
 using wpf_antivirus.pages;
 
 namespace wpf_antivirus

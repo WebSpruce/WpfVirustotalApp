@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
+using wpf_antivirus.Models;
 
-namespace wpf_antivirus
+namespace wpf_antivirus.Data
 {
     public class database
     {
@@ -16,13 +13,21 @@ namespace wpf_antivirus
             _connection = new SQLiteAsyncConnection(db_path);
             _connection.CreateTableAsync<scanhistory>();
         }
+        public Task<string> CheckIfTableIsCreated()
+        {
+            return _connection.ExecuteScalarAsync<string>("SELECT name FROM sqlite_master WHERE type='table' AND name='scanhistory';");
+        }
+        public Task<CreateTableResult> CreateTable()
+        {
+            return _connection.CreateTableAsync<scanhistory>();
+        }
         public Task<List<scanhistory>> GetScanHistory()
         {
             return _connection.Table<scanhistory>().ToListAsync();
         }
         public Task<int> SaveScanResult(scanhistory Scan)
         {
-                return _connection.InsertAsync(Scan);
+            return _connection.InsertAsync(Scan);
         }
     }
 }

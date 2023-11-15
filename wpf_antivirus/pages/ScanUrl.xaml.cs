@@ -3,6 +3,7 @@ using System.Windows;
 using VirusTotalNet.Results;
 using VirusTotalNet;
 using System.Diagnostics;
+using wpf_antivirus.Models;
 
 namespace wpf_antivirus.pages
 {
@@ -15,7 +16,6 @@ namespace wpf_antivirus.pages
         {
             InitializeComponent();
             everything = this;
-            Trace.WriteLine($"Key: {MainWindow.everything.key}");
             virusTotal2 = new VirusTotal(MainWindow.everything.key);
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
